@@ -31,8 +31,8 @@ public class Place {
 	
 	public String getId() {return this.Id;}
 	
-	public void addPlaceGroup (String description, String utcLastModified){
-		PlaceGroups.add (new PlaceGroup (description, utcLastModified));
+	public void addPlaceGroup (String description, String utcLastModified, String groupId){
+		PlaceGroups.add (new PlaceGroup (description, utcLastModified, groupId));
 	}
 	
 	public String toJson (){

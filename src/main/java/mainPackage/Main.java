@@ -8,7 +8,7 @@ import place.PlaceReader;
 public class Main {
 	public static void main (String [] args) throws Exception {
 		
-		String fileName = "target/Aguas Sanas POI.csv";
+		String fileName = "target/lagaleria.csv";
 		String message = "";
 		
 		//ScopeAPI.DeletePLaceGroup("c477aea7-83ca-4cdb-ae67-bdc9d081ec0e","administradoraguassanas","admin2015");
@@ -23,11 +23,12 @@ public class Main {
 			//places.get (0).addPlaceGroup(null, null);
 			
 			for (Place place : places){
-				place.addPlaceGroup(null, null);
+				place.addPlaceGroup(null, null, "696cc1ad-245d-4715-bdd9-d131e9c971ef");
 				message = place.toJson ();
 				++cnt;
 				echo (message);
-				HttpsClient.httpsClientAddPlaces (message);
+				
+				HttpsClient.httpsClientAddPlaces ("administradorlagaleria", "admin2015", message);
 				echo ("Contador de mensajes: " + cnt);
 			}
 			

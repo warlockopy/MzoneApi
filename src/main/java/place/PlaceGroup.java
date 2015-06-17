@@ -7,11 +7,11 @@ public class PlaceGroup {
 	private String UtcLastModified;
 	private String Id;
 	
-	public PlaceGroup (String description, String utcLastModified){
+	public PlaceGroup (String description, String utcLastModified, String id){
 		Description = description;
 		UtcLastModified = utcLastModified;
 		
-		Id = "c477aea7-83ca-4cdb-ae67-bdc9d081ec0e";
+		Id = id;
 		/*final String tabla = "0123456789abcdef";
 		
 		

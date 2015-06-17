@@ -32,12 +32,10 @@ public class HttpsClient {
 	private static String urlscope = "https://us.mzoneweb.net/api/v2/places/place.json";
 	private static String urlget = "https://us.mzoneweb.net/api/v2/places.json";
 	private static String urlapiscope = "https://us.mzoneweb.net/api/v2/placeGroups/";
-	private static String username = "administradoraguassanas";
-	private static String password = "admin2015";
 	private static String idGroup = "0ff854de-ecae-4734-ac35-d15e22d81b5a/";
 	private static String jsonpage = "places.json";
 	
-public static int httpsClientAddPlaces (String datoJson) throws Exception {
+public static int httpsClientAddPlaces (String username, String password, String datoJson) throws Exception {
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		//HttpPost post = new HttpPost(urlapiscope + idGroup + jsonpage);
