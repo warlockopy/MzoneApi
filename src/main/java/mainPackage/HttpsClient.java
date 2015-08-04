@@ -1,8 +1,10 @@
 package mainPackage;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 //import mysql2websrvc.MD5;
+
 
 
 
@@ -88,7 +90,8 @@ public static int httpsClientAddPlaces (String username, String password, String
 		
 		return httperr;
 	}
-public static String HttpsClient (String url, String user, String password) throws Exception {
+
+   public static String HttpsClient (String url, String user, String password) throws Exception {
 	
 	String datoJson = "";
 	CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -139,8 +142,9 @@ public static String HttpsClient (String url, String user, String password) thro
 	}
 	
 	return serverOutputString;
-}
-public static String HttpsClientDelete (String url, String user, String password) throws Exception {
+   }
+
+   public static String httpsClientDelete (String url, String user, String password) throws Exception {
 	
 	String datoJson = "";
 	CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -191,5 +195,53 @@ public static String HttpsClientDelete (String url, String user, String password
 	}
 	
 	return serverOutputString;
-}
+   }
+   
+   //GET
+   public static String httpsClientGet (String url, String user, String password) throws Exception {
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		
+		HttpGet get = new HttpGet(url);
+		String mydatetime, auheader;
+		
+		mydatetime = MD5.getCurrentTime();
+		get.setHeader("Accept", "application/json");
+		get.setHeader(HTTP.CONTENT_TYPE, "application/json");
+		
+		auheader =  user + ":" + password;
+		String encodedaut = Base64.encodeBase64String(auheader.getBytes());
+
+		get.addHeader("Authorization", "Basic " + encodedaut);
+		get.addHeader("date", mydatetime);
+		
+		int httperr;
+		
+		CloseableHttpResponse response = httpclient.execute(get);
+		
+		try {
+			System.out.println("Respuesta del servidor");
+			System.out.println(response.getProtocolVersion());
+			httperr = response.getStatusLine().getStatusCode();
+			System.out.println(httperr);
+			System.out.println(response.getStatusLine().getReasonPhrase());
+			
+		} finally {
+			response.close();
+		}
+		
+		byte [] buffer = new byte [65536];
+		
+		String ans = "";
+
+		InputStream stream = response.getEntity().getContent();
+		int bytesRead;
+		
+		bytesRead = stream.read(buffer);
+		System.out.println (bytesRead + " bytes read.");
+		ans += new String (buffer, 0, bytesRead);
+		stream.close ();
+		
+		return ans;
+	 }
 }
